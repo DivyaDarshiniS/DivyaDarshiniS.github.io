@@ -5,12 +5,7 @@ on:
     branches: [ Master ]
 
 jobs:
-  test-job:
-    runs-on: ubuntu-latest
-
+  test:
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: 24ds3000004@ds.study.iitm.ac.in
         run: echo "This step includes an email address in its name"
