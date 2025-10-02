@@ -1,0 +1,17 @@
+{
+  "name": "ga2-a05114",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "astral-sh.uv",
+        "ms-python.python"
+      ]
+    }
+  },
+  "postCreateCommand": "python -m pip install --upgrade pip && pip install fastapi",
+  "remoteUser": "vscode"
+}
