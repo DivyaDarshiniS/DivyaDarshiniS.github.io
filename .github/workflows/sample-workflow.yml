@@ -1,12 +1,17 @@
-name: Email-In-Step Workflow
+name: Email Action Test
 
 on:
   push:
-    branches: [ Master ]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: 24ds3000004@ds.study.iitm.ac.in
-        run: echo "This step includes an email address in its name"
+        run: echo "Hello, world!"
