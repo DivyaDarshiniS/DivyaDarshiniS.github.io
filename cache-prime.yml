@@ -1,0 +1,39 @@
+name: Cache Prime Test
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  prime-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # create the directory we will cache and add a file so the cache has something to store
+      - name: Prepare cache directory
+        run: |
+          mkdir -p .cache-deps
+          echo "primed at $(date --utc)" > .cache-deps/prime.txt
+          ls -la .cache-deps
+
+      # restore/save the cache with the required key
+      - id: cache-prime
+        name: Restore / Save cache
+        uses: actions/cache@v4
+        with:
+          path: .cache-deps
+          key: cache-ce3c2f0
+
+      # required step EXACTLY named "prime-cache-ce3c2f0" that echoes the cache hit/miss
+      - name: prime-cache-ce3c2f0
+        run: |
+          echo ">>> prime-cache-ce3c2f0: cache-hit = ${{ steps.cache-prime.outputs.cache-hit }}"
+          # For readability also print the variable explicitly:
+          if [ "${{ steps.cache-prime.outputs.cache-hit }}" = "true" ]; then
+            echo "Cache was a HIT (restored with exact key)."
+          else
+            echo "Cache was a MISS (no exact key restore)."
+          fi
