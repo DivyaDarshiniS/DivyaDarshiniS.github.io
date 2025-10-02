@@ -1,17 +1,17 @@
-name: Email Action Test
+name: Email Step Test
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: 24ds3000004@ds.study.iitm.ac.in
-        run: echo "Hello, world!"
+        run: |
+          echo "This step name contains the email address exactly."
